@@ -3,10 +3,10 @@ spring:
     name: areteum
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/areteum?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: root1234
+    url: jdbc:h2:~/areteum
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
 
   jpa:
     hibernate:
@@ -20,6 +20,11 @@ spring:
     serialization:
       fail-on-empty-beans: false
 
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
 server:
   port: 8080
 
@@ -27,3 +32,10 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    groups-order: desc
+    operations-sorter: method
+
