@@ -17,6 +17,8 @@ public class ChatEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 추가
+    private String clientId;
     private String content;
     private LocalDateTime createdAt;
 }
