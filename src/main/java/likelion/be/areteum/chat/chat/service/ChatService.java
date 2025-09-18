@@ -35,16 +35,12 @@ public class ChatService {
                 .collect(Collectors.toList());
     }
 
-    //엔티티 dto 변환 메서드
+    // 엔티티를 dto로 변환
     private ChatDto convertToDto(ChatEntity chatEntity){
         ChatDto dto = new ChatDto();
         dto.setId(chatEntity.getId());
         dto.setContent(chatEntity.getContent());
-
-        if (chatEntity.getCreatedAt() != null){
-            dto.setCreatedAt(chatEntity.getCreatedAt().format(FORMATTER));
-        }
-
+        dto.setCreatedAt(chatEntity.getCreatedAt());
         return dto;
     }
 }
