@@ -18,8 +18,9 @@ public class ChatService {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd, hh:mm a");
 
     //채팅 저장
-    public void saveMessage(String content){
+    public void saveMessage(String clientId, String content){
         ChatEntity chatEntity = new ChatEntity();
+        chatEntity.setClientId(clientId);
         chatEntity.setContent(content);
         chatEntity.setCreatedAt(LocalDateTime.now());
         chatRepository.save(chatEntity);
@@ -39,6 +40,7 @@ public class ChatService {
     private ChatDto convertToDto(ChatEntity chatEntity){
         ChatDto dto = new ChatDto();
         dto.setId(chatEntity.getId());
+        dto.setClientId(chatEntity.getClientId());
         dto.setContent(chatEntity.getContent());
         dto.setCreatedAt(chatEntity.getCreatedAt());
         return dto;
