@@ -38,6 +38,18 @@ public interface BoothScheduleRepository extends JpaRepository<BoothSchedule, In
                                     @Param("q") String q,
                                     Pageable pageable);
 
+    //페이지네이션 없는 버전
+    @Query("""
+        select s from BoothSchedule s
+        where s.eventDate = :date
+          and (:category is null or s.booth.category = :category)
+          and (:q is null or lower(s.booth.name) like lower(concat('%', :q, '%')))
+        order by s.booth.name asc
+        """)
+    List<BoothSchedule> filterAll(@Param("date") LocalDate date,
+                                  @Param("category") Category category,
+                                  @Param("q") String q);
+
     boolean existsByBoothIdAndEventDateAndStartTimeAndEndTime(
             Integer boothId, java.time.LocalDate d, java.time.LocalTime st, java.time.LocalTime et);
 
