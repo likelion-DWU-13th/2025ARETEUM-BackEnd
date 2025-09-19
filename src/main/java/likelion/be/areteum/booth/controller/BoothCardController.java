@@ -27,7 +27,7 @@ public class BoothCardController {
         """)
     @GetMapping
     public BoothSearchRes list(
-            @Parameter(description = "날짜 버튼 클릭 시 사용", example = "YYYY-MM-DD")
+            @Parameter(description = "날짜 버튼 클릭 시 사용", example = "2025-09-30")
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
 
             @Parameter(description = "부스 카테고리(카테고리별 필터링 시 사용)")
