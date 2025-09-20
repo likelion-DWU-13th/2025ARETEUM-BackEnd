@@ -1,5 +1,6 @@
 package likelion.be.areteum.booth.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import likelion.be.areteum.booth.dto.BoothCardRes;
 import likelion.be.areteum.booth.entity.Category;
 import likelion.be.areteum.booth.entity.SubCategory;
