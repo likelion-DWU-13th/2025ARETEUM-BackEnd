@@ -38,7 +38,7 @@
   {"name":"폼폼솜솜","category":"EXPERIENCE","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
   {"name":"개구리 공주의 저주를 풀어라!","category":"EXPERIENCE","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
   {"name":"루송","category":"BOOTH","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
-  {"name":"솜더랜드","category":"PERFORMANCE","subCategory":"MAIN_PERFORMANCE","description":중앙동아리 공연 + 일반공연 + 연예인 공연,"location":"백주년기념관 홀","organizer":null,"mapImageUrl":null},
+  {"name":"솜더랜드","category":"PERFORMANCE","subCategory":"MAIN_PERFORMANCE","description":"중앙동아리 공연 + 일반공연 + 연예인 공연,", "location":"백주년기념관 홀","organizer":null,"mapImageUrl":null},
   {"name":"동동 동덕이들 그려라","category":"BOOTH","subCategory":"NONE","description":null,"location":null,"organizer":null,"mapImageUrl":null},
   {"name":"귀여움 한도초과 유토피아","category":"MARKET","subCategory":"FLEA_MARKET","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
   {"name":"유토삐약","category":"MARKET","subCategory":"FLEA_MARKET","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
