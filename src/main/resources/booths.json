@@ -37,5 +37,20 @@
   {"name":"바이퀸","category":"EXPERIENCE","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
   {"name":"폼폼솜솜","category":"EXPERIENCE","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
   {"name":"개구리 공주의 저주를 풀어라!","category":"EXPERIENCE","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
-  {"name":"루송","category":"BOOTH","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null}
+  {"name":"루송","category":"BOOTH","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
+  {"name":"솜더랜드","category":"PERFORMANCE","subCategory":"MAIN_PERFORMANCE","description":중앙동아리 공연 + 일반공연 + 연예인 공연,"location":"백주년기념관 홀","organizer":null,"mapImageUrl":null},
+  {"name":"동동 동덕이들 그려라","category":"BOOTH","subCategory":"NONE","description":null,"location":null,"organizer":null,"mapImageUrl":null},
+  {"name":"귀여움 한도초과 유토피아","category":"MARKET","subCategory":"FLEA_MARKET","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
+  {"name":"유토삐약","category":"MARKET","subCategory":"FLEA_MARKET","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
+  {"name":"포유","category":"MARKET","subCategory":"FLEA_MARKET","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
+  {"name":"오~리","category":"MARKET","subCategory":"FLEA_MARKET","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
+  {"name":"앗! 거기 솜솜씨!! 이거 놓고 가셨어요!","category":"PUB","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
+  {"name":"유니버셜 솜튜디오","category":"PUB","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
+  {"name":"ghost UN","category":"PUB","subCategory":"NONE","description":null,"location":"운동장","organizer":null,"mapImageUrl":null},
+  {"name":"동글이","category":"FOOD_TRUCK","subCategory":"NONE","description":null,"location":"본관 앞, 민주광장","organizer":null,"mapImageUrl":null},
+  {"name":"맛미","category":"FOOD_TRUCK","subCategory":"NONE","description":null,"location":"본관 앞, 민주광장","organizer":null,"mapImageUrl":null},
+  {"name":"안녕푸드","category":"FOOD_TRUCK","subCategory":"NONE","description":null,"location":"본관 앞, 민주광장","organizer":null,"mapImageUrl":null},
+  {"name":"캡틴","category":"FOOD_TRUCK","subCategory":"NONE","description":null,"location":"본관 앞, 민주광장","organizer":null,"mapImageUrl":null},
+  {"name":"핑크포크","category":"FOOD_TRUCK","subCategory":"NONE","description":null,"location":"본관 앞, 민주광장","organizer":null,"mapImageUrl":null},
+  {"name":"다온푸드","category":"FOOD_TRUCK","subCategory":"NONE","description":null,"location":"본관 앞, 민주광장","organizer":null,"mapImageUrl":null}
 ]
