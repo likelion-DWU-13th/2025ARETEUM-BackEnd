@@ -6,6 +6,8 @@ import likelion.be.areteum.booth.dto.*;
 import likelion.be.areteum.booth.entity.*;
 import likelion.be.areteum.booth.repository.BoothRepository;
 import likelion.be.areteum.booth.repository.BoothScheduleRepository;
+import likelion.be.areteum.booth.repository.MenuRepository;
+import likelion.be.areteum.booth.repository.ProductRepository;
 import likelion.be.areteum.booth.service.BoothScheduleService;
 import likelion.be.areteum.booth.service.BoothService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,8 @@ public class BootstrapDataLoader implements CommandLineRunner {
     private final BoothScheduleService schSvc;
     private final BoothRepository boothRepo;               // 삭제용
     private final BoothScheduleRepository schRepo;         // 삭제용
+    private final ProductRepository productRepo;
+    private final MenuRepository menuRepo;
     private final ObjectMapper om;
 
     @Value("${seed.mergeUpsert:true}") boolean mergeUpsert;
@@ -39,8 +43,11 @@ public class BootstrapDataLoader implements CommandLineRunner {
 
     // JSON 매핑용
     record BoothImport(String name, Category category, SubCategory subCategory,
-                       String description, String location, String organizer, String mapImageUrl) {}
+                       String description, String location, String organizer, String mapImageUrl,
+                       List<ProductImport> products, List<MenuImport> menus) {}
     record SchedImport(String boothName, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {}
+    record ProductImport(String name) {}
+    record MenuImport(String name, String category, Integer price) {}
 
     @Override @Transactional
     public void run(String... args) throws Exception {
@@ -63,6 +70,32 @@ public class BootstrapDataLoader implements CommandLineRunner {
                 );
                 BoothDetailRes res = mergeUpsert ? boothSvc.upsertByName(req) : boothSvc.create(req);
                 nameToId.put(res.name().toLowerCase(), res.id());
+
+                Booth boothEntity = boothRepo.findById(res.id()).orElseThrow();
+
+                // 상품 저장
+                if (b.products() != null) {
+                    for (ProductImport p : b.products()) {
+                        Product product = Product.builder()
+                                .booth(boothEntity)
+                                .name(p.name())
+                                .build();
+                        productRepo.save(product);
+                    }
+                }
+
+                // 메뉴 저장
+                if (b.menus() != null) {
+                    for (MenuImport m : b.menus()) {
+                        Menu menu = Menu.builder()
+                                .booth(boothEntity)
+                                .name(m.name())
+                                .category(MenuCategory.from(m.category())) // "안주"/"음료" → Enum 변환
+                                .price(m.price())
+                                .build();
+                        menuRepo.save(menu);
+                    }
+                }
             }
         }
 

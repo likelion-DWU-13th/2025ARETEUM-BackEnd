@@ -3,8 +3,11 @@ package likelion.be.areteum.booth.service;
 import likelion.be.areteum.booth.dto.BoothDetailRes;
 import likelion.be.areteum.booth.entity.Booth;
 import likelion.be.areteum.booth.entity.BoothSchedule;
+import likelion.be.areteum.booth.entity.Category;
 import likelion.be.areteum.booth.repository.BoothRepository;
 import likelion.be.areteum.booth.repository.BoothScheduleRepository;
+import likelion.be.areteum.booth.repository.MenuRepository;
+import likelion.be.areteum.booth.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,8 @@ public class BoothDetailService {
 
     private final BoothRepository boothRepo;
     private final BoothScheduleRepository schRepo;
+    private final MenuRepository menuRepo;
+    private final ProductRepository productRepo;
 
     public BoothDetailRes getDetail(Integer boothId) {
         Booth b = boothRepo.findById(boothId)
@@ -31,10 +36,27 @@ public class BoothDetailService {
                 .map(s -> new BoothDetailRes.ScheduleItem(s.getEventDate(), s.getStartTime(), s.getEndTime()))
                 .toList();
 
+        // 주점 메뉴
+        List<BoothDetailRes.MenuItem> menus = List.of();
+        if (b.getCategory() == Category.PUB) {
+            menus = menuRepo.findByBoothId(boothId).stream()
+                    .map(m -> new BoothDetailRes.MenuItem(m.getName(), m.getCategory().name(), m.getPrice()))
+                    .toList();
+        }
+
+        // 마켓 상품
+        List<BoothDetailRes.ProductItem> products = List.of();
+        if (b.getCategory() == Category.MARKET) {
+            products = productRepo.findByBoothId(boothId).stream()
+                    .map(p -> new BoothDetailRes.ProductItem(p.getName()))
+                    .toList();
+        }
+
         return new BoothDetailRes(
                 b.getId(), b.getName(), b.getCategory(), b.getSubCategory(),
                 b.getOrganizer(), b.getDescription(), b.getLocation(), b.getMapImageUrl(),
-                null, List.of(), schedules // focusDate=null, focusTimes=빈 리스트
+                null, List.of(), schedules, // focusDate=null, focusTimes=빈 리스트
+                menus, products
         );
     }
 }
