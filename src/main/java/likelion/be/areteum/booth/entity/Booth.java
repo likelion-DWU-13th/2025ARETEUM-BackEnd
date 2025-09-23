@@ -32,6 +32,9 @@ public class Booth {
     @Column(length=60)
     private String location;             // 장소
 
+    @Column(name = "detail_location", length = 120)
+    private String detailLocation;       // 상세위치
+
     @Column(length=120)
     private String organizer;            // 주최/담당
 

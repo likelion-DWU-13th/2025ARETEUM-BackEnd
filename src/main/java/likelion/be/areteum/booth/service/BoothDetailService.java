@@ -53,10 +53,20 @@ public class BoothDetailService {
         }
 
         return new BoothDetailRes(
-                b.getId(), b.getName(), b.getCategory(), b.getSubCategory(),
-                b.getOrganizer(), b.getDescription(), b.getLocation(), b.getMapImageUrl(),
-                null, List.of(), schedules, // focusDate=null, focusTimes=빈 리스트
-                menus, products
+                b.getId(),
+                b.getName(),
+                b.getCategory(),
+                b.getSubCategory(),
+                b.getOrganizer(),
+                b.getDescription(),
+                b.getLocation(),
+                b.getDetailLocation(),
+                b.getMapImageUrl(),
+                null, // focusDate: null 허용이면 이렇게 명시 캐스팅
+                List.<BoothDetailRes.TimeRange>of(),
+                List.<BoothDetailRes.ScheduleItem>of(),
+                List.<BoothDetailRes.MenuItem>of(),
+                List.<BoothDetailRes.ProductItem>of()
         );
     }
 }

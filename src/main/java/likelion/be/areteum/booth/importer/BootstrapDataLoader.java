@@ -43,7 +43,7 @@ public class BootstrapDataLoader implements CommandLineRunner {
 
     // JSON 매핑용
     record BoothImport(String name, Category category, SubCategory subCategory,
-                       String description, String location, String organizer, String mapImageUrl,
+                       String description, String location, String detailLocation, String organizer, String mapImageUrl,
                        List<ProductImport> products, List<MenuImport> menus) {}
     record SchedImport(String boothName, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {}
     record ProductImport(String name) {}
@@ -65,6 +65,7 @@ public class BootstrapDataLoader implements CommandLineRunner {
                         b.subCategory() == null ? SubCategory.NONE : b.subCategory(),
                         b.description(),
                         b.location(),
+                        b.detailLocation(),
                         b.organizer(),
                         b.mapImageUrl()
                 );

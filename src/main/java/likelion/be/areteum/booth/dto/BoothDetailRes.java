@@ -17,6 +17,7 @@ public record BoothDetailRes(
         String organizer,
         String description,
         String location,
+        String detailLocation,
         String mapImageUrl,
         LocalDate focusDate,
         List<TimeRange> focusDateTimes,
