@@ -51,7 +51,7 @@ public class BoothService {
         return new BoothDetailRes(
                 b.getId(), b.getName(), b.getCategory(), b.getSubCategory(),
                 b.getOrganizer(), b.getDescription(), b.getLocation(), b.getMapImageUrl(),
-                null, List.of(), List.of()
+                null, List.of(), List.of(), List.of(), List.of()
         );
     }
 }

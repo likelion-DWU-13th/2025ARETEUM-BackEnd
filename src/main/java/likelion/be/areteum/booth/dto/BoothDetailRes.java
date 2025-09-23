@@ -3,6 +3,8 @@ package likelion.be.areteum.booth.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import likelion.be.areteum.booth.entity.Category;
 import likelion.be.areteum.booth.entity.SubCategory;
+
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -18,7 +20,9 @@ public record BoothDetailRes(
         String mapImageUrl,
         LocalDate focusDate,
         List<TimeRange> focusDateTimes,
-        List<ScheduleItem> schedules
+        List<ScheduleItem> schedules,
+        List<MenuItem> menus,       // 주점일 경우
+        List<ProductItem> products  // 마켓일 경우
 ) {
     public record TimeRange(
             @JsonFormat(pattern="HH:mm") LocalTime start,
@@ -29,5 +33,15 @@ public record BoothDetailRes(
             LocalDate date,
             @JsonFormat(pattern="HH:mm") LocalTime start,
             @JsonFormat(pattern="HH:mm") LocalTime end
+    ) {}
+
+    public record MenuItem(
+            String name,
+            String category, // "ANJU" or "DRINK"
+            Integer price
+    ) {}
+
+    public record ProductItem(
+            String name
     ) {}
 }
