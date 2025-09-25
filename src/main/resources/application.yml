@@ -39,3 +39,8 @@ springdoc:
     groups-order: desc
     operations-sorter: method
 
+seed:
+  mergeUpsert: true                 # 부스: 수정·추가 반영
+  deleteMissingBooths: true         # 부스: 시드에 없는 건 삭제
+  scheduleStrategy: DIFF            # REPLACE | MERGE | DIFF
+  clearSchedulesIfMissingInSeed: false
