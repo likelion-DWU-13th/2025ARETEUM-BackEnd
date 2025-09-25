@@ -28,7 +28,9 @@ public class ChatService {
 
     //최근 100개 불러오기
     public List<ChatDto> getRecentMessages(){
+
         List<ChatEntity> messages = chatRepository.findTop100ByOrderByCreatedAtAscIdAsc();
+
 
         //엔티티를 dto로 변환
         return messages.stream()
