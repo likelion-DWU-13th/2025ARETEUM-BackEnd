@@ -23,6 +23,9 @@ public record BoothDetailRes(
         List<TimeRange> focusDateTimes,
         List<ScheduleItem> schedules,
         List<MenuItem> menus,       // 주점일 경우
+        List<SetMenuItem> setMenus,
+        List<ExtraItem> extras,
+
         List<ProductItem> products  // 마켓일 경우
 ) {
     public record TimeRange(
@@ -39,10 +42,22 @@ public record BoothDetailRes(
     public record MenuItem(
             String name,
             String category, // "ANJU" or "DRINK"
-            Integer price
+            Integer price,
+            String note
     ) {}
 
     public record ProductItem(
             String name
+    ) {}
+
+    public record SetMenuItem(
+            String name,
+            Integer price,
+            String benefit,
+            List<String> items
+    ) {}
+
+    public record ExtraItem(
+            String content
     ) {}
 }

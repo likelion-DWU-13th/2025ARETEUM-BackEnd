@@ -4,10 +4,7 @@ import likelion.be.areteum.booth.dto.BoothDetailRes;
 import likelion.be.areteum.booth.entity.Booth;
 import likelion.be.areteum.booth.entity.BoothSchedule;
 import likelion.be.areteum.booth.entity.Category;
-import likelion.be.areteum.booth.repository.BoothRepository;
-import likelion.be.areteum.booth.repository.BoothScheduleRepository;
-import likelion.be.areteum.booth.repository.MenuRepository;
-import likelion.be.areteum.booth.repository.ProductRepository;
+import likelion.be.areteum.booth.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +22,8 @@ public class BoothDetailService {
     private final BoothScheduleRepository schRepo;
     private final MenuRepository menuRepo;
     private final ProductRepository productRepo;
+    private final SetMenuRepository setMenuRepo;
+    private final ExtraRepository extraRepo;
 
     public BoothDetailRes getDetail(Integer boothId) {
         Booth b = boothRepo.findById(boothId)
@@ -40,7 +39,7 @@ public class BoothDetailService {
         List<BoothDetailRes.MenuItem> menus = List.of();
         if (b.getCategory() == Category.PUB) {
             menus = menuRepo.findByBoothId(boothId).stream()
-                    .map(m -> new BoothDetailRes.MenuItem(m.getName(), m.getCategory().name(), m.getPrice()))
+                    .map(m -> new BoothDetailRes.MenuItem(m.getName(), m.getCategory().name(), m.getPrice(), m.getNote()))
                     .toList();
         }
 
@@ -51,6 +50,21 @@ public class BoothDetailService {
                     .map(p -> new BoothDetailRes.ProductItem(p.getName()))
                     .toList();
         }
+
+        // 세트메뉴
+        List<BoothDetailRes.SetMenuItem> setMenus = setMenuRepo.findByBoothId(boothId).stream()
+                .map(s -> new BoothDetailRes.SetMenuItem(
+                        s.getName(),
+                        s.getPrice(),
+                        s.getBenefit(),
+                        s.getItems()
+                ))
+                .toList();
+
+        // 이벤트
+        List<BoothDetailRes.ExtraItem> extras = extraRepo.findByBoothId(boothId).stream()
+                .map(e -> new BoothDetailRes.ExtraItem(e.getContent()))
+                .toList();
 
         return new BoothDetailRes(
                 b.getId(),
@@ -64,9 +78,11 @@ public class BoothDetailService {
                 b.getMapImageUrl(),
                 null, // focusDate: null 허용이면 이렇게 명시 캐스팅
                 List.<BoothDetailRes.TimeRange>of(),
-                List.<BoothDetailRes.ScheduleItem>of(),
-                List.<BoothDetailRes.MenuItem>of(),
-                List.<BoothDetailRes.ProductItem>of()
+                schedules,
+                menus,
+                setMenus,
+                extras,
+                products
         );
     }
 }

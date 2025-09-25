@@ -20,7 +20,7 @@ public class MenuService {
         return menuRepo.findByBoothId(boothId);
     }
 
-    public Menu addMenu(Integer boothId, String name, MenuCategory category, Integer price) {
+    public Menu addMenu(Integer boothId, String name, MenuCategory category, Integer price, String note) {
         Booth booth = boothRepo.findById(boothId)
                 .orElseThrow(() -> new IllegalArgumentException("부스 없음: " + boothId));
         Menu menu = Menu.builder()
@@ -28,6 +28,7 @@ public class MenuService {
                 .name(name)
                 .category(category)
                 .price(price)
+                .note(note)
                 .build();
         return menuRepo.save(menu);
     }

@@ -24,7 +24,9 @@ public class MenuController {
     public Menu addMenu(@PathVariable Integer boothId,
                         @RequestParam String name,
                         @RequestParam MenuCategory category,
-                        @RequestParam Integer price) {
-        return menuService.addMenu(boothId, name, category, price);
+                        @RequestParam Integer price,
+                        @RequestParam(required = false) String note
+    ) {
+        return menuService.addMenu(boothId, name, category, price, note);
     }
 }

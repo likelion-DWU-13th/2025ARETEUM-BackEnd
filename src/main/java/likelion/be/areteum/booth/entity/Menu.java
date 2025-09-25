@@ -23,8 +23,11 @@ public class Menu {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable=false, length=20)
-    private MenuCategory category; // ANJU, DRINK
+    private MenuCategory category;
 
     @Column(nullable=false)
     private Integer price;
+
+    @Column(length=200)
+    private String note; // 분홍색 안내 문구
 }
