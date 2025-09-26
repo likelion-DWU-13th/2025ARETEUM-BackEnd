@@ -29,6 +29,7 @@ public class BoothService {
                 .detailLocation(r.detailLocation())
                 .organizer(r.organizer())
                 .mapImageUrl(r.mapImageUrl())
+                .timeNote(r.timeNote())
                 .build();
         b = boothRepo.save(b);
         return toDetail(b);
@@ -44,7 +45,9 @@ public class BoothService {
         b.setLocation(r.location());
         b.setDetailLocation(r.detailLocation());
         b.setOrganizer(r.organizer());
+        b.setTimeNote(r.timeNote());
         b.setMapImageUrl(r.mapImageUrl());
+
         b = boothRepo.save(b);
         return toDetail(b);
     }
@@ -60,6 +63,7 @@ public class BoothService {
                 b.getLocation(),
                 b.getDetailLocation(),
                 b.getMapImageUrl(),
+                b.getTimeNote(),
                 null,
                 List.<BoothDetailRes.TimeRange>of(),
                 List.<BoothDetailRes.ScheduleItem>of(),

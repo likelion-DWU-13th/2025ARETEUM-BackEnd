@@ -43,7 +43,7 @@ public class BootstrapDataLoader implements CommandLineRunner {
 
     // JSON 매핑용
     record BoothImport(String name, Category category, SubCategory subCategory,
-                       String description, String location, String detailLocation, String organizer, String mapImageUrl,
+                       String description, String location, String detailLocation, String organizer, String mapImageUrl, String timeNote,
                        List<ProductImport> products, List<MenuImport> menus) {}
     record SchedImport(String boothName, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {}
     record ProductImport(String name) {}
@@ -67,7 +67,8 @@ public class BootstrapDataLoader implements CommandLineRunner {
                         b.location(),
                         b.detailLocation(),
                         b.organizer(),
-                        b.mapImageUrl()
+                        b.mapImageUrl(),
+                        b.timeNote() == null ? "" : b.timeNote()
                 );
                 BoothDetailRes res = mergeUpsert ? boothSvc.upsertByName(req) : boothSvc.create(req);
                 nameToId.put(res.name().toLowerCase(), res.id());
