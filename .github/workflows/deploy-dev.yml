@@ -13,7 +13,7 @@ jobs:
       - name: SSH build & restart backend on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SSH_HOST_DEV }}
+          host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
