@@ -14,8 +14,11 @@ import java.util.stream.Collectors;
 public enum MenuCategory {
     ANJU("안주"),
     DRINK("음료"),
-    ALCOHOL("주류"),   // ← 추가
-    EVENT("이벤트");   // ← 추가
+    ALCOHOL("주류"),
+    SET("세트"),
+    ETC("기타"),
+    EVENT("이벤트"),
+    FT("푸드트럭");
 
     private final String label;
 
