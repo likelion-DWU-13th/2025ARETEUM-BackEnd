@@ -17,22 +17,33 @@ jobs:
           username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script_stop: true
           debug: true
           script: |
-            set -e
-            if [ -d /srv/festival-backend-dev/.git ]; then
-              cd /srv/festival-backend-dev
-              git fetch origin
-              git reset --hard origin/develop
-            else
+            set -Eeuo pipefail
+            set -x
+            whoami && hostname && date
+
+            # 상태 점검
+            docker --version
+            docker-compose --version || docker compose version || true
+            ls -al /srv || true
+
+            # 백엔드 소스 확보 (없으면 worktree 생성)
+            if [ ! -d /srv/festival-backend-dev/.git ]; then
               cd /srv/2025ARETEUM-BackEnd
               git fetch --all --prune
               git worktree add /srv/festival-backend-dev origin/develop
             fi
 
+            cd /srv/festival-backend-dev
+            git fetch origin
+            git reset --hard origin/develop
+
+            # 빌드/재기동
             cd /srv/staging-deployment
             docker-compose -p areteum-dev build backend
             docker-compose -p areteum-dev up -d backend
 
-            docker-compose -p areteum-dev logs --tail=50 backend || true
+            # 상태 출력
+            docker-compose -p areteum-dev ps
+            docker-compose -p areteum-dev logs --tail=100 backend || true
