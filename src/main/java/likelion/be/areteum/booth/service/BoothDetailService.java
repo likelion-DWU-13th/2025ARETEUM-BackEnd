@@ -76,6 +76,7 @@ public class BoothDetailService {
                 b.getLocation(),
                 b.getDetailLocation(),
                 b.getMapImageUrl(),
+                b.getTimeNote(),
                 null, // focusDate: null 허용이면 이렇게 명시 캐스팅
                 List.<BoothDetailRes.TimeRange>of(),
                 schedules,

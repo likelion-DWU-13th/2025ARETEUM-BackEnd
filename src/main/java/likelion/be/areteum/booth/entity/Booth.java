@@ -41,6 +41,9 @@ public class Booth {
     @Column(length=255)
     private String mapImageUrl;          // 지도 이미지 URL
 
+    @Column(name  = "time_note", length = 255)
+    private String timeNote;
+
     @OneToMany(mappedBy="booth", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<BoothSchedule> schedules = new ArrayList<>();
 
