@@ -23,7 +23,7 @@ public record BoothDetailRes(
         List<TimeRange> focusDateTimes,
         List<ScheduleItem> schedules,
         List<MenuItem> menus,       // 주점일 경우
-        List<SetMenuItem> setMenus,
+        List<SetMenuRes> setMenus,
         List<ExtraItem> extras,
 
         List<ProductItem> products  // 마켓일 경우
@@ -50,11 +50,15 @@ public record BoothDetailRes(
             String name
     ) {}
 
-    public record SetMenuItem(
+    public record SetMenuRes(
             String name,
+            List<VariantItem> variants
+    ) {}
+
+    public record VariantItem(
+            List<String> items,
             Integer price,
-            String benefit,
-            List<String> items
+            String note
     ) {}
 
     public record ExtraItem(

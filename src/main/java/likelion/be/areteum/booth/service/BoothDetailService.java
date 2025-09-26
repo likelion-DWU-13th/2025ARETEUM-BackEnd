@@ -52,12 +52,12 @@ public class BoothDetailService {
         }
 
         // 세트메뉴
-        List<BoothDetailRes.SetMenuItem> setMenus = setMenuRepo.findByBoothId(boothId).stream()
-                .map(s -> new BoothDetailRes.SetMenuItem(
+        List<BoothDetailRes.SetMenuRes> setMenus = setMenuRepo.findByBoothId(boothId).stream()
+                .map(s -> new BoothDetailRes.SetMenuRes(
                         s.getName(),
-                        s.getPrice(),
-                        s.getBenefit(),
-                        s.getItems()
+                        s.getVariants().stream()
+                                .map(v -> new BoothDetailRes.VariantItem(v.getItems(), v.getPrice(), v.getNote()))
+                                .toList()
                 ))
                 .toList();
 

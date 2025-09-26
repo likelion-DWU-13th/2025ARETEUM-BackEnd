@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
+@Hidden
 @RestController
 @RequestMapping("/api/booths/{boothId}/products")
 @RequiredArgsConstructor

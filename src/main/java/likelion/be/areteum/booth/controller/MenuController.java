@@ -6,8 +6,11 @@ import likelion.be.areteum.booth.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 import java.util.List;
 
+@Hidden
 @RestController
 @RequestMapping("/api/booths/{boothId}/menus")
 @RequiredArgsConstructor
