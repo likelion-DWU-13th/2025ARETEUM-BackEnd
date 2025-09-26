@@ -1,0 +1,35 @@
+name: Deploy Backend (develop → staging)
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  deploy-dev-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: SSH build & restart backend on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST_DEV }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            if [ -d /srv/festival-backend-dev/.git ]; then
+              cd /srv/festival-backend-dev
+              git fetch origin
+              git reset --hard origin/develop
+            else
+              cd /srv/2025ARETEUM-BackEnd
+              git fetch --all --prune
+              git worktree add /srv/festival-backend-dev origin/develop
+            fi
+
+            cd /srv/staging-deployment
+            docker-compose -p areteum-dev build backend
+            docker-compose -p areteum-dev up -d backend
+
+            docker-compose -p areteum-dev logs --tail=50 backend || true
