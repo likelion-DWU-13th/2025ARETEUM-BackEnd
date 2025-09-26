@@ -9,41 +9,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: SSH build & restart backend on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          debug: true
           script: |
-            set -Eeuo pipefail
-            set -x
-            whoami && hostname && date
+            set -euo pipefail
 
-            # 상태 점검
-            docker --version
-            docker-compose --version || docker compose version || true
-            ls -al /srv || true
-
-            # 백엔드 소스 확보 (없으면 worktree 생성)
-            if [ ! -d /srv/festival-backend-dev/.git ]; then
+            # worktree 존재/정상 여부 판단: .git은 파일(-f)이어야 함
+            if [ -f /srv/festival-backend-dev/.git ]; then
+              cd /srv/festival-backend-dev
+              git fetch origin
+              git reset --hard origin/develop
+            else
+              # 깨져있을 수 있으니 정리 후 재생성
+              rm -rf /srv/festival-backend-dev || true
               cd /srv/2025ARETEUM-BackEnd
               git fetch --all --prune
+              git worktree prune
               git worktree add /srv/festival-backend-dev origin/develop
             fi
 
-            cd /srv/festival-backend-dev
-            git fetch origin
-            git reset --hard origin/develop
-
-            # 빌드/재기동
             cd /srv/staging-deployment
             docker-compose -p areteum-dev build backend
             docker-compose -p areteum-dev up -d backend
 
-            # 상태 출력
             docker-compose -p areteum-dev ps
             docker-compose -p areteum-dev logs --tail=100 backend || true
