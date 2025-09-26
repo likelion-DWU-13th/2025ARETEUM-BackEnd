@@ -14,8 +14,11 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.SSH_USER }}
+          username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script_stop: true
+          debug: true
           script: |
             set -e
             if [ -d /srv/festival-backend-dev/.git ]; then
