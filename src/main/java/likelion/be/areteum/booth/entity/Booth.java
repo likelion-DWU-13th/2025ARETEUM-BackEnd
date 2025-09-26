@@ -51,6 +51,9 @@ public class Booth {
     private List<Menu> menus = new ArrayList<>(); // 주점일 경우만 사용
 
     @OneToMany(mappedBy="booth", cascade=CascadeType.ALL, orphanRemoval=true)
+    private List<SetMenu> setMenus = new ArrayList<>();
+
+    @OneToMany(mappedBy="booth", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Product> products = new ArrayList<>(); // 마켓일 경우만 사용
 
     @Column(nullable=false, updatable=false)
