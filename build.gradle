@@ -37,6 +37,9 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
     //스웨거 문서
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
 }
