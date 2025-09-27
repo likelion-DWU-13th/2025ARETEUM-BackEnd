@@ -42,6 +42,12 @@ dependencies {
 
     //스웨거 문서
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+
+	//  Actuator (헬스체크/메트릭)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    //  JSON 로그 인코더 (Logback)
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
 }
 
 tasks.named('test') {
