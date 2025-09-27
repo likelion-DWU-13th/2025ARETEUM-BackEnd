@@ -69,7 +69,6 @@ public class BoothService {
                 List.<BoothDetailRes.ScheduleItem>of(),
                 List.<BoothDetailRes.MenuItem>of(),
                 List.<BoothDetailRes.SetMenuRes>of(),
-                List.<BoothDetailRes.ExtraItem>of(),
                 List.<BoothDetailRes.ProductItem>of()
         );
     }
