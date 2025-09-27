@@ -11,6 +11,8 @@ public record BoothCreateReq(
         SubCategory subCategory,
         String description,
         String location,
+        String detailLocation,
         String organizer,
-        String mapImageUrl
+        String mapImageUrl,
+        String timeNote
 ) {}

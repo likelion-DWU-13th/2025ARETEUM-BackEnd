@@ -26,8 +26,10 @@ public class BoothService {
                 .subCategory(r.subCategory() == null ? SubCategory.NONE : r.subCategory())
                 .description(r.description())
                 .location(r.location())
+                .detailLocation(r.detailLocation())
                 .organizer(r.organizer())
                 .mapImageUrl(r.mapImageUrl())
+                .timeNote(r.timeNote())
                 .build();
         b = boothRepo.save(b);
         return toDetail(b);
@@ -41,17 +43,33 @@ public class BoothService {
         b.setSubCategory(r.subCategory() == null ? SubCategory.NONE : r.subCategory());
         b.setDescription(r.description());
         b.setLocation(r.location());
+        b.setDetailLocation(r.detailLocation());
         b.setOrganizer(r.organizer());
+        b.setTimeNote(r.timeNote());
         b.setMapImageUrl(r.mapImageUrl());
+
         b = boothRepo.save(b);
         return toDetail(b);
     }
 
     private static BoothDetailRes toDetail(Booth b) {
         return new BoothDetailRes(
-                b.getId(), b.getName(), b.getCategory(), b.getSubCategory(),
-                b.getOrganizer(), b.getDescription(), b.getLocation(), b.getMapImageUrl(),
-                null, List.of(), List.of()
+                b.getId(),
+                b.getName(),
+                b.getCategory(),
+                b.getSubCategory(),
+                b.getOrganizer(),
+                b.getDescription(),
+                b.getLocation(),
+                b.getDetailLocation(),
+                b.getMapImageUrl(),
+                b.getTimeNote(),
+                null,
+                List.<BoothDetailRes.TimeRange>of(),
+                List.<BoothDetailRes.ScheduleItem>of(),
+                List.<BoothDetailRes.MenuItem>of(),
+                List.<BoothDetailRes.SetMenuRes>of(),
+                List.<BoothDetailRes.ProductItem>of()
         );
     }
 }

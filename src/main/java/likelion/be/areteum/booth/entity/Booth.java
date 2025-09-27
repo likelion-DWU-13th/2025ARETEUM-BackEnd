@@ -3,6 +3,8 @@ package likelion.be.areteum.booth.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "booth")
@@ -30,11 +32,29 @@ public class Booth {
     @Column(length=60)
     private String location;             // 장소
 
+    @Column(name = "detail_location", length = 120)
+    private String detailLocation;       // 상세위치
+
     @Column(length=120)
     private String organizer;            // 주최/담당
 
     @Column(length=255)
     private String mapImageUrl;          // 지도 이미지 URL
+
+    @Column(name  = "time_note", length = 255)
+    private String timeNote;
+
+    @OneToMany(mappedBy="booth", cascade=CascadeType.ALL, orphanRemoval=true)
+    private List<BoothSchedule> schedules = new ArrayList<>();
+
+    @OneToMany(mappedBy="booth", cascade=CascadeType.ALL, orphanRemoval=true)
+    private List<Menu> menus = new ArrayList<>(); // 주점일 경우만 사용
+
+    @OneToMany(mappedBy="booth", cascade=CascadeType.ALL, orphanRemoval=true)
+    private List<SetMenu> setMenus = new ArrayList<>();
+
+    @OneToMany(mappedBy="booth", cascade=CascadeType.ALL, orphanRemoval=true)
+    private List<Product> products = new ArrayList<>(); // 마켓일 경우만 사용
 
     @Column(nullable=false, updatable=false)
     private LocalDateTime createdAt;
