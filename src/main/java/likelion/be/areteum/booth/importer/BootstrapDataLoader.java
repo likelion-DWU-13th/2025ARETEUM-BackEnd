@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import likelion.be.areteum.booth.dto.*;
 import likelion.be.areteum.booth.entity.*;
-import likelion.be.areteum.booth.repository.BoothRepository;
-import likelion.be.areteum.booth.repository.BoothScheduleRepository;
-import likelion.be.areteum.booth.repository.MenuRepository;
-import likelion.be.areteum.booth.repository.ProductRepository;
+import likelion.be.areteum.booth.repository.*;
 import likelion.be.areteum.booth.service.BoothScheduleService;
 import likelion.be.areteum.booth.service.BoothService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +33,8 @@ public class BootstrapDataLoader implements CommandLineRunner {
     private final BoothScheduleRepository schRepo;
     private final ProductRepository productRepo;
     private final MenuRepository menuRepo;
+    private final SetMenuRepository setMenuRepo;
+    private final SetMenuVariantRepository setMenuVariantRepo;
     private final ObjectMapper om;
 
     @Value("${seed.mergeUpsert:true}") boolean mergeUpsert;
@@ -55,18 +54,20 @@ public class BootstrapDataLoader implements CommandLineRunner {
             String mapImageUrl,
             String timeNote,
             List<ProductImport> products,
-            List<MenuImport> menus
+            List<MenuImport> menus,
+            List<SetMenuImport> setMenus
     ) {}
     record SchedImport(String boothName, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {}
     record ProductImport(String name) {}
-    // note 는 선택. 없으면 null 로 들어옴.
     record MenuImport(String name, String category, Integer price, String note) {}
+    record SetMenuImport(String name, List<VariantImport> variants) {}
+    record VariantImport(List<String> items, Integer price, String note) {}
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Map<String, Integer> nameToId = new HashMap<>(); // booth name → id
-        Set<String> targetNames = new HashSet<>();       // 시드 부스(삭제 판정용)
+        Map<String, Integer> nameToId = new HashMap<>(); // booth name (lowercase) → id
+        Set<String> targetNames = new HashSet<>();       // 시드 부스(삭제 판정용, lowercase)
 
         // 1) 부스 업서트 + 이름→ID 매핑 수집
         try (InputStream in = new ClassPathResource("booths.json").getInputStream()) {
@@ -125,39 +126,82 @@ public class BootstrapDataLoader implements CommandLineRunner {
                             continue;
                         }
                         if (m.category() == null || m.category().isBlank()) {
-                            // JSON에 setMenus 같은 다른 구조가 섞여 들어온 경우 여기로 옵니다.
                             log.warn("Menu 스킵(category 누락): booth={}, name={}", boothEntity.getName(), m.name());
                             continue;
                         }
 
-                        // 2) 카테고리 파싱 (오타/미지원 값 방지)
+                        // 세트는 menu가 아닌 setMenus로만 처리
+                        if ("세트".equals(m.category()) || "SET".equalsIgnoreCase(m.category())) {
+                            log.warn("세트는 setMenus로 처리하므로 menu 입력 스킵: booth={}, name={}", boothEntity.getName(), m.name());
+                            continue;
+                        }
+
+                        // 2) 카테고리 파싱
                         final MenuCategory cat;
                         try {
                             cat = MenuCategory.from(m.category());
                         } catch (IllegalArgumentException ex) {
-                            log.warn("Menu 스킵(카테고리 파싱 실패): booth={}, name={}, raw={}", boothEntity.getName(), m.name(), m.category());
+                            log.warn("Menu 스킵(카테고리 파싱 실패): booth={}, name={}, raw={}",
+                                    boothEntity.getName(), m.name(), m.category());
                             continue;
                         }
 
                         // 3) 업서트 (있으면 갱신, 없으면 생성)
                         menuRepo.findByBoothIdAndNameAndCategory(boothEntity.getId(), m.name(), cat)
                                 .ifPresentOrElse(existing -> {
-                                            // 갱신
                                             existing.setPrice(m.price());
-                                            // note 필드가 엔티티에 있다면 같이 반영
-                                            try { existing.getClass().getMethod("setNote", String.class); existing.setNote(m.note()); } catch (NoSuchMethodException ignore) {}
+                                            existing.setNote(m.note());
                                         },
-                                        () -> {
-                                            Menu.MenuBuilder builder = Menu.builder()
-                                                    .booth(boothEntity)
-                                                    .name(m.name())
-                                                    .category(cat)
-                                                    .price(m.price());
-                                            // note 필드가 있으면 세팅
-                                            try { builder.getClass().getMethod("note", String.class); builder.note(m.note()); } catch (NoSuchMethodException ignore) {}
-                                            menuRepo.save(builder.build());
-                                        }
+                                        () -> menuRepo.save(Menu.builder()
+                                                .booth(boothEntity)
+                                                .name(m.name())
+                                                .category(cat)
+                                                .price(m.price())
+                                                .note(m.note())
+                                                .build())
                                 );
+                    }
+                }
+
+                // ----- 세트메뉴 REPLACE -----
+                if (b.setMenus() != null && !b.setMenus().isEmpty()) {
+                    // 1) 기존 세트/버전 전부 삭제 (자식 먼저)
+                    List<SetMenu> existingSets = setMenuRepo.findByBoothId(boothEntity.getId());
+                    if (!existingSets.isEmpty()) {
+                        for (SetMenu sm : existingSets) {
+                            var variants = setMenuVariantRepo.findBySetMenuId(sm.getId());
+                            if (!variants.isEmpty()) {
+                                setMenuVariantRepo.deleteAllInBatch(variants); // 자식 먼저 제거
+                            }
+                        }
+                        setMenuRepo.deleteAllInBatch(existingSets); // 그 다음 부모 제거
+                    }
+
+                    // 2) 시드대로 삽입
+                    for (SetMenuImport sm : b.setMenus()) {
+                        if (sm == null || sm.name() == null || sm.name().isBlank()) continue;
+
+                        SetMenu setMenu = setMenuRepo.save(SetMenu.builder()
+                                .booth(boothEntity)
+                                .name(sm.name())
+                                .build());
+
+                        if (sm.variants() != null) {
+                            Set<String> seen = new LinkedHashSet<>();
+                            for (VariantImport v : sm.variants()) {
+                                if (v == null) continue;
+                                List<String> items = (v.items() == null) ? List.of() : v.items();
+                                String sig = v.price() + "|" + String.join(",", items) + "|" + String.valueOf(v.note());
+                                if (!seen.add(sig)) continue; // 중복 방지
+
+                                setMenuVariantRepo.save(SetMenuVariant.builder()
+                                        .setMenu(setMenu)
+                                        .price(v.price())
+                                        .note(v.note())
+                                        .items(items)
+                                        .build());
+                            }
+                        }
                     }
                 }
             }
