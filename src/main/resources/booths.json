@@ -34,21 +34,22 @@
   {"name":"손끝의 아지트","category":"마켓","subCategory":"플리마켓","description":null,"location":"운동장","detailLocation":"동덕여자대학교 운동장 - 플리마켓 12번","organizer":null,"mapImageUrl":null,"timeNote":"","products":[{"name":"키링"},{"name": "백팩"},{"name":"파우치"},{"name":"네일체험"}]},
   {"name":"오~리","category":"마켓","subCategory":"플리마켓","description":null,"location":"운동장","detailLocation":"동덕여자대학교 운동장 - 플리마켓 5번","organizer":null,"mapImageUrl":null,"timeNote":"","products":[{"name":"엽서"}]},
   {
-    "name":"모여봐요 얼의 주점",
-    "category":"주점",
-    "subCategory":"없음",
-    "description":null,
-    "location":"동덕여자대학교 운동장",
-    "detailLocation":"주점 3번",
-    "organizer":"밴드동아리 얼사랑",
-    "mapImageUrl":null,
-    "timeNote":"",
-    "menus":[
+    "name": "모여봐요 얼의 주점",
+    "category": "주점",
+    "subCategory": "없음",
+    "description": null,
+    "location": "동덕여자대학교 운동장",
+    "detailLocation": "주점 3번",
+    "organizer": "밴드동아리 얼사랑",
+    "mapImageUrl": null,
+    "timeNote": "",
+    "menus": [
       {"name":"콘치즈","category":"안주","price":6000},
       {"name":"두부김치","category":"안주","price":8000},
       {"name":"오뎅탕","category":"안주","price":8000},
       {"name":"소시지볶음","category":"안주","price":6000},
-      {"name":"떡볶이","category":"안주","price":7000}
+      {"name":"떡볶이","category":"안주","price":7000},
+      {"name":"안주 최소 2개 이상 주문 시 술 무제한","category":"이벤트","price":0}
     ]
   },
   {
@@ -115,67 +116,126 @@
     ]
   },
   {
-    "name":"앗! 거기 솜솜씨!! 이거 놓고 가셨어요!",
-    "category":"주점",
-    "subCategory":"없음",
-    "description":null,
-    "location":"동덕여자대학교 운동장",
-    "detailLocation":"주점 3번",
-    "organizer":"래디컬 페미니즘 동아리 사이렌",
-    "mapImageUrl":null,
-    "timeNote":"",
-    "menus":[
-      {"name":"김치우동","category":"안주","price":8000},
-      {"name":"묵사발","category":"안주","price":8000},
-      {"name":"소시지&떡","category":"안주","price":8000},
-      {"name":"팝쵸(팝콘 + 나쵸)","category":"안주","price":3500},
-      {"name":"잃어버린 카드(카드형 멀티툴)","category":"기타","price":8000},
-      {"name":"A세트(김치우동 + 묵사발 + 소시지&떡 + 팝쵸)","category":"세트","price":27500},
-      {"name":"B세트(김치우동 + 소시지&떡 + 설탕토마토)","category":"세트","price":21000}
+    "name": "앗! 거기 솜솜씨!! 이거 놓고 가셨어요!",
+    "category": "주점",
+    "subCategory": "없음",
+    "description": null,
+    "location": "동덕여자대학교 운동장",
+    "detailLocation": "주점 3번",
+    "organizer": "래디컬 페미니즘 동아리 사이렌",
+    "mapImageUrl": null,
+    "timeNote": "",
+    "menus": [
+      {"name": "김치우동", "category": "안주", "price": 8000, "note": null},
+      {"name": "묵사발", "category": "안주", "price": 8000, "note": null},
+      {"name": "소시지&떡", "category": "안주", "price": 8000, "note": null},
+      {"name": "팝쵸(팝콘 + 나쵸)", "category": "안주", "price": 3500, "note": null},
+      {"name": "잃어버린 카드(카드형 멀티툴)", "category": "기타", "price": 8000, "note": null}
+    ],
+    "setMenus": [
+      {
+        "name": "A세트",
+        "variants": [
+          {
+            "items": ["김치우동", "묵사발", "소시지&떡", "팝쵸"],
+            "price": 27500,
+            "note": "첫 주문은 세트 주문 필수"
+          }
+        ]
+      },
+      {
+        "name": "B세트",
+        "variants": [
+          {
+            "items": ["김치우동", "소시지&떡", "설탕토마토"],
+            "price": 21000,
+            "note":  "첫 주문은 세트 주문 필수"
+          }
+        ]
+      }
     ]
   },
   {
-    "name":"AIESEC GHOST HOUSE:내 얘기를 들어줘",
-    "category":"주점",
-    "subCategory":"없음",
-    "description":null,
-    "location":"동덕여자대학교 운동장",
-    "detailLocation":"주점 1번",
-    "organizer":"래디컬 페미니즘 동아리 사이렌",
-    "mapImageUrl":null,
-    "timeNote":"",
-    "menus":[
+    "name": "AIESEC GHOST HOUSE:내 얘기를 들어줘",
+    "category": "주점",
+    "subCategory": "없음",
+    "description": null,
+    "location": "동덕여자대학교 운동장",
+    "detailLocation": "주점 1번",
+    "organizer": "래디컬 페미니즘 동아리 사이렌",
+    "mapImageUrl": null,
+    "timeNote": "",
+    "menus": [
       {"name":"김치전","category":"안주","price":5000},
       {"name":"나쵸","category":"안주","price":4000},
       {"name":"오뎅탕","category":"안주","price":6000},
       {"name":"소시지볶음","category":"안주","price":6000},
-      {"name":"아이스크림 팬케이크","category":"안주","price":5500}
+      {"name":"아이스크림 팬케이크","category":"안주","price":5500},
+      {"name":"1,5000원 이상 주문 시 주류 한 병 제공","category":"이벤트","price":0}
     ]
   },
   {
-    "name":"유니버셜 솜튜디오",
-    "category":"주점",
-    "subCategory":"없음",
-    "description":null,
-    "location":"동덕여자대학교 운동장",
-    "detailLocation":"주점 2번",
-    "organizer":"고토노하",
-    "mapImageUrl":null,
-    "timeNote":"",
-    "menus":[
-      {"name":"타코야끼","category":"안주","price":7000},
-      {"name":"교자","category":"안주","price":6500},
-      {"name":"치킨 가라아게","category":"안주","price":6000},
-      {"name":"뻥튀기 小","category":"안주","price":1500},
-      {"name":"뻥튀기 中","category":"안주","price":2000},
-      {"name":"펩시 제로 라임","category":"음료","price":2000},
-      {"name":"타코야끼 + 교자","category":"세트","price":13000},
-      {"name":"타코야끼 + 가라아게","category":"세트","price":12500},
-      {"name":"타코야끼 + 교자 + 가라아게","category":"세트","price":18500},
-      {"name":"타코야끼 + 교자 + 뻥튀기 小","category":"세트","price":14000},
-      {"name":"타코야끼 + 가라아게 + 뻥튀기 小","category":"세트","price":13500},
-      {"name":"타코야끼 + 교자 + 가라아게 + 뻥튀기 中","category":"세트","price":19000}
-    ]
+    "name": "유니버셜 솜튜디오",
+    "category": "주점",
+    "subCategory": "없음",
+    "description": null,
+    "location": "동덕여자대학교 운동장",
+    "detailLocation": "주점 2번",
+    "organizer": "고토노하",
+    "mapImageUrl": null,
+    "timeNote": null,
+    "menus": [
+      { "name": "타코야끼", "category": "안주", "price": 7000, "note": null },
+      { "name": "교자", "category": "안주", "price": 6500, "note": null },
+      { "name": "치킨 가라아게", "category": "안주", "price": 6000, "note": null },
+      { "name": "뻥튀기 小", "category": "안주", "price": 1500, "note": null },
+      { "name": "뻥튀기 中", "category": "안주", "price": 2000, "note": null },
+      { "name": "펩시 제로 라임", "category": "음료", "price": 2000, "note": null }
+    ],
+    "setMenus": [
+      {
+        "name": "맥주set",
+        "variants": [
+          {
+            "items": ["타코야끼", "교자"],
+            "price": 13000,
+            "note": "주문 시 맥주 2잔 증정"
+          },
+          {
+            "items": ["타코야끼", "가라아게"],
+            "price": 12500,
+            "note": "주문 시 맥주 2잔 증정"
+          },
+          {
+            "items": ["타코야끼", "교자", "가라아게"],
+            "price": 18500,
+            "note": "주문 시 맥주 3잔 증정"
+          }
+        ]
+      },
+      {
+        "name": "하이set",
+        "variants": [
+          {
+            "items": ["타코야끼", "교자", "뻥튀기 小"],
+            "price": 14000,
+            "note": "주문 시 하이볼 2잔 증정"
+          },
+          {
+            "items": ["타코야끼", "가라아게", "뻥튀기 小"],
+            "price": 13500,
+            "note": "주문 시 하이볼 2잔 증정"
+          },
+          {
+            "items": ["타코야끼", "교자", "가라아게", "뻥튀기 中"],
+            "price": 19000,
+            "note": "주문 시 하이볼 3잔 증정"
+          }
+        ]
+      }
+    ],
+    "products": [],
+    "schedules": []
   },
   {"name":"ghost UN","category":"주점","subCategory":"없음","description":null,"location":"운동장","detailLocation":null,"organizer":null,"mapImageUrl":null,"timeNote":""},
   {
@@ -220,7 +280,15 @@
     "detailLocation":"축운위 9번",
     "organizer":"동덕여자대학교 축제운영위원회",
     "mapImageUrl":null,
-    "timeNote":"* 매 시간 45분~00분: 운행 재정비 및 이벤트 진행 시간"
+    "timeNote":"* 매 시간 45분~00분: 운행 재정비 및 이벤트 진행 시간",
+    "menus":[
+      {
+        "name":"1회",
+        "category":"기타",
+        "price":2500,
+        "note":"계좌이체만 가능"
+      }
+    ]
   },
   {
     "name":"폼폼솜솜",
@@ -253,8 +321,8 @@
     "detailLocation":null,
     "organizer":"동덕여자대학교 축제운영위원회",
     "mapImageUrl":null,
-    "timeNote":""
-  },
+    "timeNote":"",
+    "menus":[ {"name":"1+1","category":"기타","price":6000, "note":"카드 결제 가능"} ] },
   {
     "name":"루송",
     "category":"부스",
