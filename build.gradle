@@ -1,7 +1,19 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		// ✅ Flyway Gradle Task(classpath)용
+		classpath "org.flywaydb:flyway-mysql:10.16.0"
+		classpath "com.mysql:mysql-connector-j:8.1.0"
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.5'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.flywaydb.flyway' version '10.16.0'
 }
 
 group = 'likelion.be'
@@ -29,16 +41,28 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	// ✅ 앱 실행용 (Spring Boot 구동시 Flyway 동작)
+	implementation 'org.flywaydb:flyway-core:10.16.0'
+
 	runtimeOnly 'com.h2database:h2'
 
-    //스웨거 문서
+	// Swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+}
+
+flyway {
+	url = 'jdbc:mysql://ddwu-festival-new-db.cf62m0am4vli.ap-northeast-2.rds.amazonaws.com:3306/areteum'
+	user = 'admin'
+	password = 'ddwu2025!'
+	driver = 'com.mysql.cj.jdbc.Driver'
+	// 기본 마이그레이션 경로는 classpath:db/migration
 }
 
 tasks.named('test') {
