@@ -42,6 +42,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
+    implementation 'com.mysql:mysql-connector-j'
+	
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
@@ -77,3 +79,5 @@ flyway {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+tasks.named('bootJar') { enabled = true }
+tasks.named('jar') { enabled = false }
