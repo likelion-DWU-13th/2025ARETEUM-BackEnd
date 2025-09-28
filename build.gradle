@@ -20,11 +20,17 @@ group = 'likelion.be'
 version = '0.0.1-SNAPSHOT'
 description = 'Demo project for Spring Boot'
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+// java toolchain 주석 처리된 상태 유지
+// java {
+//   toolchain {
+//     languageVersion = JavaLanguageVersion.of(21)
+//   }
+// }
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
 }
+
 
 configurations {
 	compileOnly {
