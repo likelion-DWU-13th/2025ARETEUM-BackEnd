@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		// ✅ Flyway Gradle Task(classpath)용
+		// Flyway Gradle Task(classpath)용
 		classpath "org.flywaydb:flyway-mysql:10.16.0"
 		classpath "com.mysql:mysql-connector-j:8.1.0"
 	}
@@ -48,13 +48,22 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	// ✅ 앱 실행용 (Spring Boot 구동시 Flyway 동작)
+	// 앱 실행용 (Spring Boot 구동시 Flyway 동작)
 	implementation 'org.flywaydb:flyway-core:10.16.0'
 
 	runtimeOnly 'com.h2database:h2'
+	
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	// Swagger
+    //스웨거 문서
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+
+	//  Actuator (헬스체크/메트릭)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    //  JSON 로그 인코더 (Logback)
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
 }
 
 flyway {
