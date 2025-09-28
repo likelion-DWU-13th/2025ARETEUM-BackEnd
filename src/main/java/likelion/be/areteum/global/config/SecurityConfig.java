@@ -40,6 +40,7 @@ public class SecurityConfig {
             "https://dwu-festival2025.com",
             "https://www.dwu-festival2025.com",
             "http://dev.dwu-festival2025.com:8081",
+            "https://dev.dwu-festival2025.com:8443",
             "http://localhost:3000"
         ));
         cfg.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
