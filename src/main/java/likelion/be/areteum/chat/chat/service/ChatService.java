@@ -5,6 +5,7 @@ import likelion.be.areteum.chat.chat.entity.ChatEntity;
 import likelion.be.areteum.chat.chat.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,16 +16,22 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ChatService {
+
+    private final SimpMessagingTemplate messagingTemplate;
     private final ChatRepository chatRepository;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd, hh:mm a");
 
     //채팅 저장
-    public void saveMessage(String clientId, String content){
+    public void saveMessageAndSend(String clientId, String content) {
+        // 1. DB에 메시지 저장
         ChatEntity chatEntity = new ChatEntity();
         chatEntity.setClientId(clientId);
         chatEntity.setContent(content);
         chatEntity.setCreatedAt(LocalDateTime.now());
         chatRepository.save(chatEntity);
+
+        ChatDto chatDto = convertToDto(chatEntity);
+        messagingTemplate.convertAndSend("/topic/public", chatDto);
     }
 
   //최근 100개 불러오기
