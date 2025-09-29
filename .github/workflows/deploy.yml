@@ -1,0 +1,27 @@
+name: Deploy Backend (develop)
+on: { push: { branches: [ "develop" ] } }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /srv/2025ARETEUM-BackEnd
+            git fetch --all --prune
+            # worktree가 이미 있으면 reset, 없으면 새로 추가
+            if [ -d /srv/festival-backend/.git ]; then
+              cd /srv/festival-backend
+              git fetch origin
+              git reset --hard origin/develop
+            else
+              git worktree add /srv/festival-backend origin/develop || true
+            fi
+            cd /srv/2025ARETEUM-Production-Deployment
+            docker-compose build backend
+            docker-compose up -d backend
