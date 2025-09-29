@@ -27,16 +27,21 @@ public class ChatService {
     }
 
     //최근 100개 불러오기
-    public List<ChatDto> getRecentMessages(){
+    public List<ChatDto> getRecentMessages() {
+        List<ChatEntity> messages = chatRepository.findTop100ByOrderByCreatedAtDescIdDesc();
 
-        List<ChatEntity> messages = chatRepository.findTop100ByOrderByCreatedAtAscIdAsc();
-
-
-        //엔티티를 dto로 변환
         return messages.stream()
+                .sorted((a, b) -> {
+                    int compare = a.getCreatedAt().compareTo(b.getCreatedAt());
+                    if (compare == 0) {
+                        return a.getId().compareTo(b.getId());
+                    }
+                    return compare;
+                })
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
+
 
     // 엔티티를 dto로 변환
     private ChatDto convertToDto(ChatEntity chatEntity){
