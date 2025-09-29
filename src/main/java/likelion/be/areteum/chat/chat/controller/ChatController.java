@@ -1,7 +1,5 @@
 package likelion.be.areteum.chat.chat.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import likelion.be.areteum.chat.chat.dto.ChatDto;
 import likelion.be.areteum.chat.chat.service.ChatService;
 import lombok.RequiredArgsConstructor;
@@ -13,19 +11,19 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name="Chat API", description = "채팅 API - 담당(이주연, 최이주)")
 public class ChatController {
+
     private final ChatService chatService;
 
-    @MessageMapping("/chat") //send destination
-    public void sendMessage(ChatDto message){
+    // 실시간 메시지 수신 (클라이언트 → 서버)
+    @MessageMapping("/chat")
+    public void receiveMessage(ChatDto message) {
         chatService.saveMessageAndSend(message.getClientId(), message.getContent());
     }
 
-    // 최근 100개 불러오기 (REST API 호출)
+    // 초기 메시지 로딩 (프론트에서 호출)
     @GetMapping("/chat/history")
-    @Operation(summary = "최근 100개 채팅 불러오기")
-    public List<ChatDto> getRecentMessage(){
-        return chatService.getRecentMessages();
+    public List<ChatDto> getAllMessages() {
+        return chatService.getAllMessages();
     }
 }
