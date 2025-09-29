@@ -28,12 +28,7 @@ public class ChatService {
 
   //최근 100개 불러오기
     public List<ChatDto> getRecentMessages() {
-        // 1. DB에서 가장 최근 메시지 100개를 가져옵니다 (id와 생성 시간 내림차순).
-        // 이렇게 해야 DB에 저장된 마지막 100개의 메시지가 선택됩니다.
         List<ChatEntity> messages = chatRepository.findTop100ByOrderByCreatedAtDescIdDesc();
-
-        // 2. 가져온 메시지 리스트(최신순)를 다시 시간 오름차순으로 정렬하여 반환합니다.
-        // 이렇게 해야 채팅 화면에서 시간 순서대로 (과거 -> 최신) 표시됩니다.
         return messages.stream()
                 .sorted(Comparator.comparing(ChatEntity::getCreatedAt)
                         .thenComparing(ChatEntity::getId)) // 생성 시간 및 ID 오름차순(ASC)으로 정렬
