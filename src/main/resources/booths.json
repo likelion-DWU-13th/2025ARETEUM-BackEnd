@@ -44,12 +44,12 @@
     "mapImageUrl": "/images/ju3.png",
     "timeNote": "",
     "menus": [
-      {"name":"콘치즈","category":"안주","price":6000},
-      {"name":"두부김치","category":"안주","price":8000},
-      {"name":"오뎅탕","category":"안주","price":8000},
-      {"name":"소시지볶음","category":"안주","price":6000},
-      {"name":"떡볶이","category":"안주","price":7000},
-      {"name":"안주 최소 2개 이상 주문 시 술 무제한","category":"이벤트","price":0}
+      {"name":"콘치즈","category":"안주","price":6000, "note": null},
+      {"name":"두부김치","category":"안주","price":8000, "note": null},
+      {"name":"오뎅탕","category":"안주","price":8000, "note": null},
+      {"name":"소시지볶음","category":"안주","price":6000, "note": null},
+      {"name":"떡볶이","category":"안주","price":7000, "note": null},
+      {"name":"안주 최소 2개 이상 주문 시 술 무제한","category":"이벤트","price":0, "note": null}
     ]
   },
   {
@@ -63,19 +63,19 @@
     "mapImageUrl":"/images/ju2.png",
     "timeNote":"",
     "menus":[
-      {"name":"김치우동","category":"안주","price":9000},
-      {"name":"마라팽이당면","category":"안주","price":7000},
-      {"name":"오꼬노미야끼","category":"안주","price":8000},
-      {"name":"버터갈릭감자튀김","category":"안주","price":6000},
-      {"name":"참치카나페","category":"안주","price":5000},
-      {"name":"모듬소시지","category":"안주","price":7000},
-      {"name":"메론소다","category":"음료","price":6000},
-      {"name":"체리콕","category":"음료","price":6000},
-      {"name":"레몬에이드","category":"음료","price":6000}
+      {"name":"김치우동","category":"안주","price":9000, "note": null},
+      {"name":"마라팽이당면","category":"안주","price":7000, "note": null},
+      {"name":"오꼬노미야끼","category":"안주","price":8000, "note": null},
+      {"name":"버터갈릭감자튀김","category":"안주","price":6000, "note": null},
+      {"name":"참치카나페","category":"안주","price":5000, "note": null},
+      {"name":"모듬소시지","category":"안주","price":7000, "note": null},
+      {"name":"메론소다","category":"음료","price":6000, "note": null},
+      {"name":"체리콕","category":"음료","price":6000, "note": null},
+      {"name":"레몬에이드","category":"음료","price":6000, "note": null}
     ]
   },
   {
-    "name":"하...마시고싶다",
+    "name":"하~ 마시고싶다",
     "category":"주점",
     "subCategory":"없음",
     "description":null,
@@ -85,12 +85,12 @@
     "mapImageUrl":"/images/ju4.png",
     "timeNote":"",
     "menus":[
-      {"name":"오이&당근 쌈장","category":"안주","price":0},
-      {"name":"닭꼬치","category":"안주","price":4000},
-      {"name":"어묵탕","category":"안주","price":5000},
-      {"name":"치킨너겟","category":"안주","price":3500},
-      {"name":"꿀토마토&치즈","category":"안주","price":5000},
-      {"name":"감자탕컵라면","category":"안주","price":3000}
+      {"name":"오이&당근 쌈장","category":"안주","price":0, "note": null},
+      {"name":"닭꼬치","category":"안주","price":4000, "note": null},
+      {"name":"어묵탕","category":"안주","price":5000, "note": null},
+      {"name":"치킨너겟","category":"안주","price":3500, "note": null},
+      {"name":"꿀토마토&치즈","category":"안주","price":5000, "note": null},
+      {"name":"감자탕컵라면","category":"안주","price":3000, "note": null}
     ]
   },
   {
@@ -104,15 +104,15 @@
     "mapImageUrl":"/images/ju1.png",
     "timeNote":"",
     "menus":[
-      {"name":"치즈불파게티(2인분)","category":"안주","price":8000},
-      {"name":"메가밤스낵(워킹타코)","category":"안주","price":6000},
-      {"name":"치즈계란말이","category":"안주","price":7000},
-      {"name":"전남친 토스트(블루베리크림치즈토스트)","category":"안주","price":3000},
-      {"name":"뿌링클호떡","category":"안주","price":2000},
-      {"name":"강냉이","category":"안주","price":3000},
-      {"name":"사이다","category":"음료","price":2000},
-      {"name":"콜라","category":"음료","price":2000},
-      {"name":"하이볼","category":"주류","price":3000}
+      {"name":"치즈불파게티(2인분)","category":"안주","price":8000, "note": null},
+      {"name":"메가밤스낵(워킹타코)","category":"안주","price":6000, "note": null},
+      {"name":"치즈계란말이","category":"안주","price":7000, "note": null},
+      {"name":"전남친 토스트(블루베리크림치즈토스트)","category":"안주","price":3000, "note": null},
+      {"name":"뿌링클호떡","category":"안주","price":2000, "note": null},
+      {"name":"강냉이","category":"안주","price":3000, "note": "* 소주 or 맥주 증정"},
+      {"name":"사이다","category":"음료","price":2000, "note": null},
+      {"name":"콜라","category":"음료","price":2000, "note": null},
+      {"name":"하이볼","category":"주류","price":3000, "note": "* 선착순 수량"}
     ]
   },
   {
@@ -139,7 +139,7 @@
           {
             "items": ["김치우동", "묵사발", "소시지&떡", "팝쵸"],
             "price": 27500,
-            "note": "첫 주문은 세트 주문 필수"
+            "note": "* 첫 주문은 세트메뉴 주문 필수"
           }
         ]
       },
@@ -149,7 +149,7 @@
           {
             "items": ["김치우동", "소시지&떡", "설탕토마토"],
             "price": 21000,
-            "note":  "첫 주문은 세트 주문 필수"
+            "note": "* 첫 주문은 세트메뉴 주문 필수"
           }
         ]
       }
@@ -166,12 +166,12 @@
     "mapImageUrl": "/images/ju1.png",
     "timeNote": "",
     "menus": [
-      {"name":"김치전","category":"안주","price":5000},
-      {"name":"나쵸","category":"안주","price":4000},
-      {"name":"오뎅탕","category":"안주","price":6000},
-      {"name":"소시지볶음","category":"안주","price":6000},
-      {"name":"아이스크림 팬케이크","category":"안주","price":5500},
-      {"name":"15,000원 이상 주문 시 주류 한 병 제공","category":"이벤트","price":0}
+      {"name":"김치전","category":"안주","price":5000, "note": null},
+      {"name":"나쵸","category":"안주","price":4000, "note": null},
+      {"name":"오뎅탕","category":"안주","price":6000, "note": null},
+      {"name":"소시지볶음","category":"안주","price":6000, "note": null},
+      {"name":"아이스크림 팬케이크","category":"안주","price":5500, "note": null},
+      {"name":"15000원 이상 주문 시 주류 1병 제공","category":"이벤트","price":0, "note": null}
     ]
   },
   {
@@ -188,8 +188,8 @@
       { "name": "타코야끼", "category": "안주", "price": 7000, "note": null },
       { "name": "교자", "category": "안주", "price": 6500, "note": null },
       { "name": "치킨 가라아게", "category": "안주", "price": 6000, "note": null },
-      { "name": "뻥튀기 小", "category": "안주", "price": 1500, "note": null },
-      { "name": "뻥튀기 中", "category": "안주", "price": 2000, "note": null },
+      { "name": "뻥튀기 小", "category": "안주", "price": 1500, "note": "* 구매 시 맥주 1캔 증정" },
+      { "name": "뻥튀기 中", "category": "안주", "price": 2000, "note": "* 구매 시 하이볼 1잔 증정" },
       { "name": "펩시 제로 라임", "category": "음료", "price": 2000, "note": null }
     ],
     "setMenus": [
@@ -199,17 +199,17 @@
           {
             "items": ["타코야끼", "교자"],
             "price": 13000,
-            "note": "주문 시 맥주 2잔 증정"
+            "note": "* 주문 시 맥주 2캔 증정"
           },
           {
             "items": ["타코야끼", "가라아게"],
             "price": 12500,
-            "note": "주문 시 맥주 2잔 증정"
+            "note": "* 주문 시 맥주 2캔 증정"
           },
           {
             "items": ["타코야끼", "교자", "가라아게"],
             "price": 18500,
-            "note": "주문 시 맥주 3잔 증정"
+            "note": "* 주문 시 맥주 3캔 증정"
           }
         ]
       },
@@ -219,17 +219,17 @@
           {
             "items": ["타코야끼", "교자", "뻥튀기 小"],
             "price": 14000,
-            "note": "주문 시 하이볼 2잔 증정"
+            "note": "* 주문 시 하이볼 2잔 증정"
           },
           {
             "items": ["타코야끼", "가라아게", "뻥튀기 小"],
             "price": 13500,
-            "note": "주문 시 하이볼 2잔 증정"
+            "note": "* 주문 시 하이볼 2잔 증정"
           },
           {
             "items": ["타코야끼", "교자", "가라아게", "뻥튀기 中"],
             "price": 19000,
-            "note": "주문 시 하이볼 3잔 증정"
+            "note": "* 주문 시 하이볼 3잔 증정"
           }
         ]
       }
@@ -280,7 +280,7 @@
     "detailLocation":"동덕여자대학교 운동장 - 축운위 9번",
     "organizer":"동덕여자대학교 축제운영위원회",
     "mapImageUrl":"/images/je2_ch9.png",
-    "timeNote":"* 매 시간 45분~00분: 운행 재정비 및 이벤트 진행 시간",
+    "timeNote":"* 매 시간 45분-00분: 운행 재정비 및 이벤트 진행 시간",
     "menus":[
       {
         "name":"1회",
@@ -322,7 +322,7 @@
     "organizer":"동덕여자대학교 축제운영위원회",
     "mapImageUrl":"/images/je3.png",
     "timeNote":"",
-    "menus":[ {"name":"1+1","category":"기타","price":6000, "note":"카드 결제 가능"} ] },
+    "menus":[ {"name":"1+1","category":"기타","price":6000, "note":"* 카드 결제 가능"} ] },
   {
     "name":"루송",
     "category":"부스",
@@ -367,11 +367,11 @@
     "mapImageUrl":"/images/f2.png",
     "timeNote":"",
     "menus":[
-      {"name":"소프트아이스크림 바닐라","category":"푸드트럭","price":4000},
-      {"name":"소프트아이스크림 딸기","category":"푸드트럭","price":5000},
-      {"name":"소프트아이스크림 초코","category":"푸드트럭","price":5000},
-      {"name":"소프트아이스크림 인절미","category":"푸드트럭","price":5000},
-      {"name":"소프트아이스크림 흑임자","category":"푸드트럭","price":5000}
+      {"name":"소프트아이스크림 바닐라","category":"푸드트럭","price":4000, "note": null},
+      {"name":"소프트아이스크림 딸기","category":"푸드트럭","price":5000, "note": null},
+      {"name":"소프트아이스크림 초코","category":"푸드트럭","price":5000, "note": null},
+      {"name":"소프트아이스크림 인절미","category":"푸드트럭","price":5000, "note": null},
+      {"name":"소프트아이스크림 흑임자","category":"푸드트럭","price":5000, "note": null}
     ]
   },
   {
@@ -385,8 +385,8 @@
     "mapImageUrl":"/images/f5.png",
     "timeNote":"",
     "menus":[
-      {"name":"회오리감자","category":"푸드트럭","price":5000},
-      {"name":"닭꼬치","category":"푸드트럭","price":5000}
+      {"name":"회오리감자","category":"푸드트럭","price":5000, "note": null},
+      {"name":"닭꼬치","category":"푸드트럭","price":5000, "note": null}
     ]
   },
   {
@@ -400,10 +400,10 @@
     "mapImageUrl":"/images/f4.png",
     "timeNote":"",
     "menus":[
-      {"name":"떡볶이","category":"푸드트럭","price":5000},
-      {"name":"찰순대","category":"푸드트럭","price":5000},
-      {"name":"어묵(2p)","category":"푸드트럭","price":3000},
-      {"name":"어묵(4p)","category":"푸드트럭","price":5000}
+      {"name":"떡볶이","category":"푸드트럭","price":5000, "note": null},
+      {"name":"찰순대","category":"푸드트럭","price":5000, "note": null},
+      {"name":"어묵(2p)","category":"푸드트럭","price":3000, "note": null},
+      {"name":"어묵(4p)","category":"푸드트럭","price":5000, "note": null}
     ]
   },
   {
@@ -417,8 +417,8 @@
     "mapImageUrl":"/images/f3.png",
     "timeNote":"",
     "menus":[
-      {"name":"닭강정(중)","category":"푸드트럭","price":10000},
-      {"name":"닭강정(대)","category":"푸드트럭","price":15000}
+      {"name":"닭강정(중)","category":"푸드트럭","price":10000, "note": null},
+      {"name":"닭강정(대)","category":"푸드트럭","price":15000, "note": null}
     ]
   },
   {
@@ -432,8 +432,8 @@
     "mapImageUrl":"/images/f1.png",
     "timeNote":"",
     "menus":[
-      {"name":"소고기불초밥","category":"푸드트럭","price":10000},
-      {"name":"새우초밥","category":"푸드트럭","price":10000}
+      {"name":"소고기불초밥","category":"푸드트럭","price":10000, "note": null},
+      {"name":"새우초밥","category":"푸드트럭","price":10000, "note": null}
     ]
   },
   {
@@ -447,8 +447,8 @@
     "mapImageUrl":"/images/f6.png",
     "timeNote":"",
     "menus":[
-      {"name":"크림/칠리새우(중)","category":"푸드트럭","price":10000},
-      {"name":"크림/칠리새우(대)","category":"푸드트럭","price":15000}
+      {"name":"크림/칠리새우(중)","category":"푸드트럭","price":10000, "note": null},
+      {"name":"크림/칠리새우(대)","category":"푸드트럭","price":15000, "note": null}
     ]
   }
 ]
