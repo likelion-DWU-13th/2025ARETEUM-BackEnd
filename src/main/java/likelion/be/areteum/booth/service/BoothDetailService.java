@@ -35,12 +35,14 @@ public class BoothDetailService {
                 .toList();
 
         // 주점 메뉴
-        List<BoothDetailRes.MenuItem> menus = List.of();
-        if (b.getCategory() == Category.PUB) {
-            menus = menuRepo.findByBoothId(boothId).stream()
-                    .map(m -> new BoothDetailRes.MenuItem(m.getName(), m.getCategory().name(), m.getPrice(), m.getNote()))
-                    .toList();
-        }
+        List<BoothDetailRes.MenuItem> menus =
+                menuRepo.findByBoothId(boothId).stream()
+                        .map(m -> new BoothDetailRes.MenuItem(
+                                m.getName(),
+                                m.getCategory().toString(),
+                                m.getPrice(),
+                                m.getNote()))
+                        .toList();
 
         // 마켓 상품
         List<BoothDetailRes.ProductItem> products = List.of();
