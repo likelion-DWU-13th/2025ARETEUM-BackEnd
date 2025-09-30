@@ -15,5 +15,8 @@ public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
     @Query(value = "select * from chat_entity order by id desc limit 100", nativeQuery = true)
     List<ChatEntity> findRecent100();
 
+    Page<ChatEntity> findAllByOrderByIdDesc(Pageable pageable);
+
 //    Page<ChatEntity> findAllByOrderByIdAsc(Pageable pageable);
+
 }

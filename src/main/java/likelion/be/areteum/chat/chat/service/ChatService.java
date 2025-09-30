@@ -4,6 +4,7 @@ import likelion.be.areteum.chat.chat.dto.ChatDto;
 import likelion.be.areteum.chat.chat.entity.ChatEntity;
 import likelion.be.areteum.chat.chat.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -48,9 +49,17 @@ public class ChatService {
 //        Pageable pageable = PageRequest.of(0, 100);
 //        List<ChatEntity> messages = chatRepository.findAllByOrderByIdAsc(pageable).getContent();
 
-        List<ChatEntity> messages = chatRepository.findRecent100();
+//        List<ChatEntity> messages = chatRepository.findRecent100();
+//
+//        Collections.reverse(messages);
+//
+//        return messages.stream()
+//                .map(this::convertToDto)
+//                .collect(Collectors.toList());
 
-        Collections.reverse(messages);
+        Page<ChatEntity> messages = chatRepository.findAllByOrderByIdDesc(PageRequest.of(0, 100));
+
+        Collections.reverse(messages.getContent());
 
         return messages.stream()
                 .map(this::convertToDto)
