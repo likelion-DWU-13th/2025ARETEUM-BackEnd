@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,9 +32,21 @@ public class ChatService {
         messagingTemplate.convertAndSend("/topic/chat", chatDto);
     }
 
-    // 전체 메시지 가져오기 (초기 로딩)
-    public List<ChatDto> getAllMessages() {
-        List<ChatEntity> messages = chatRepository.findAllByOrderByCreatedAtAscIdAsc();
+//    // 전체 메시지 가져오기 (초기 로딩)
+//    public List<ChatDto> getAllMessages() {
+//        List<ChatEntity> messages = chatRepository.findAllByOrderByCreatedAtAscIdAsc();
+//        return messages.stream()
+//                .map(this::convertToDto)
+//                .collect(Collectors.toList());
+//    }
+
+
+    //100개 정렬
+    public List<ChatDto> getRecentMessages(){
+        List<ChatEntity> messages = chatRepository.findTop100ByOrderByCreatedAtDescIdDesc();
+
+        Collections.reverse(messages);
+
         return messages.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
