@@ -45,7 +45,7 @@ public class ChatService {
     public List<ChatDto> getRecentMessages(){
         List<ChatEntity> messages = chatRepository.findTop100ByOrderByIdDesc();
 
-        Collections.reverse(messages);
+        //Collections.reverse(messages);
 
         return messages.stream()
                 .map(this::convertToDto)
