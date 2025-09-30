@@ -4,6 +4,8 @@ import likelion.be.areteum.chat.chat.dto.ChatDto;
 import likelion.be.areteum.chat.chat.entity.ChatEntity;
 import likelion.be.areteum.chat.chat.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
@@ -43,7 +45,8 @@ public class ChatService {
 
     //100개 정렬
     public List<ChatDto> getRecentMessages(){
-        List<ChatEntity> messages = chatRepository.findRecent100();
+        Pageable pageable = PageRequest.of(0, 100);
+        List<ChatEntity> messages = chatRepository.findAllByOrderByIdAsc(pageable).getContent();
 
         Collections.reverse(messages);
 
