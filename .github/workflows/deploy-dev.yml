@@ -32,7 +32,7 @@ jobs:
               git worktree add /srv/festival-backend origin/main 
             fi
 
-            cd /srv/festival-backend # 경로 변경
+            cd /srv/2025ARETEUM-Production-Deployment # 경로 변경
             docker-compose -p areteum-prod build backend
             docker-compose -p areteum-prod up -d backend 
 
