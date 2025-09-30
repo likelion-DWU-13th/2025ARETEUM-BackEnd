@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,7 +75,9 @@ public class ChatService {
         dto.setId(chatEntity.getId());
         dto.setClientId(chatEntity.getClientId());
         dto.setContent(chatEntity.getContent());
-        dto.setCreatedAt(chatEntity.getCreatedAt());
+        dto.setCreatedAt(chatEntity.getCreatedAt()
+                .atOffset(ZoneOffset.UTC)
+                .toInstant());
         return dto;
     }
 }
