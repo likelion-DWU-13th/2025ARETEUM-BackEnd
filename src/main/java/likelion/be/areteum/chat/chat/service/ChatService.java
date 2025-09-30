@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,11 +58,13 @@ public class ChatService {
 //                .map(this::convertToDto)
 //                .collect(Collectors.toList());
 
-        Page<ChatEntity> messages = chatRepository.findAllByOrderByIdDesc(PageRequest.of(0, 100));
+        Page<ChatEntity> messages =
+                chatRepository.findAllByOrderByIdDesc(PageRequest.of(0, 100));
 
-        Collections.reverse(messages.getContent());
+        List<ChatEntity> copy = new ArrayList<>(messages.getContent());
+        Collections.reverse(copy);
 
-        return messages.stream()
+        return copy.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
