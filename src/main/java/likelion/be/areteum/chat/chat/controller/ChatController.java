@@ -21,9 +21,9 @@ public class ChatController {
         chatService.saveMessageAndSend(message.getClientId(), message.getContent());
     }
 
-    // 초기 메시지 로딩 (프론트에서 호출)
+    //100개
     @GetMapping("/chat/history")
-    public List<ChatDto> getAllMessages() {
-        return chatService.getAllMessages();
+    public List<ChatDto> getRecentMessages() {
+       return chatService.getRecentMessages();
     }
 }
