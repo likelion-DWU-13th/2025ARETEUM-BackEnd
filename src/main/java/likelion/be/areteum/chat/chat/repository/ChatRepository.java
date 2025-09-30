@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
 
-    @Query(value = "SELECT * FROM (SELECT * FROM chat_entity ORDER BY id DESC LIMIT 100) AS recent_chats ORDER BY id ASC", nativeQuery = true)
-    List<ChatEntity> findRecent100OrderedAsc();
+    @Query(value = "select * from chat_entity order by id desc limit 100", nativeQuery = true)
+    List<ChatEntity> findRecent100();
 }
