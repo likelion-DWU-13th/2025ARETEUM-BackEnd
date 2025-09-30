@@ -16,6 +16,6 @@ public class ChatDto {
     private String clientId;
     private String content;
 
-    @JsonFormat(pattern = "yyyy-MM-dd, hh:mm a", locale = "en_US")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX", timezone = "UTC")
     private LocalDateTime createdAt;
 }
