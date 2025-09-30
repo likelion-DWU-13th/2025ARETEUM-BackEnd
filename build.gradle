@@ -1,0 +1,89 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		// Flyway Gradle Task(classpath)용
+		classpath "org.flywaydb:flyway-mysql:10.16.0"
+		classpath "com.mysql:mysql-connector-j:8.1.0"
+	}
+}
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.flywaydb.flyway' version '10.16.0'
+}
+
+group = 'likelion.be'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+// java toolchain 주석 처리된 상태 유지
+// java {
+//   toolchain {
+//     languageVersion = JavaLanguageVersion.of(21)
+//   }
+// }
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+}
+
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+    implementation 'com.mysql:mysql-connector-j'
+	
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// 앱 실행용 (Spring Boot 구동시 Flyway 동작)
+	implementation 'org.flywaydb:flyway-core:10.16.0'
+
+	runtimeOnly 'com.h2database:h2'
+	
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //스웨거 문서
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+
+	//  Actuator (헬스체크/메트릭)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    //  JSON 로그 인코더 (Logback)
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
+}
+
+flyway {
+	url = 'jdbc:mysql://ddwu-festival-new-db.cf62m0am4vli.ap-northeast-2.rds.amazonaws.com:3306/areteum'
+	user = 'admin'
+	password = 'ddwu2025!'
+	driver = 'com.mysql.cj.jdbc.Driver'
+	// 기본 마이그레이션 경로는 classpath:db/migration
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+tasks.named('bootJar') { enabled = true }
+tasks.named('jar') { enabled = false }
