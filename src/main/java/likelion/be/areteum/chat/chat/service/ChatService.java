@@ -45,8 +45,10 @@ public class ChatService {
 
     //100개 정렬
     public List<ChatDto> getRecentMessages(){
-        Pageable pageable = PageRequest.of(0, 100);
-        List<ChatEntity> messages = chatRepository.findAllByOrderByIdAsc(pageable).getContent();
+//        Pageable pageable = PageRequest.of(0, 100);
+//        List<ChatEntity> messages = chatRepository.findAllByOrderByIdAsc(pageable).getContent();
+
+        List<ChatEntity> messages = chatRepository.findRecent100();
 
         Collections.reverse(messages);
 
