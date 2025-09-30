@@ -1,11 +1,11 @@
-name: Deploy Backend (develop → staging)
+name: Deploy Backend (main → production) # main 배포용
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
-  deploy-dev-backend:
+  deploy-prod-backend: # job 이름 변경
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,22 +19,22 @@ jobs:
             set -euo pipefail
 
             # worktree 존재/정상 여부 판단: .git은 파일(-f)이어야 함
-            if [ -f /srv/festival-backend-dev/.git ]; then
-              cd /srv/festival-backend-dev
+            if [ -f /srv/festival-backend/.git ]; then
+              cd /srv/festival-backend
               git fetch origin
-              git reset --hard origin/develop
+              git reset --hard origin/main
             else
               # 깨져있을 수 있으니 정리 후 재생성
-              rm -rf /srv/festival-backend-dev || true
+              rm -rf /srv/festival-backend || true 
               cd /srv/2025ARETEUM-BackEnd
               git fetch --all --prune
               git worktree prune
-              git worktree add /srv/festival-backend-dev origin/develop
+              git worktree add /srv/festival-backend origin/main 
             fi
 
-            cd /srv/staging-deployment
-            docker-compose -p areteum-dev build backend
-            docker-compose -p areteum-dev up -d backend
+            cd /srv/production-deployment # 경로 변경
+            docker-compose -p areteum-prod build backend
+            docker-compose -p areteum-prod up -d backend 
 
-            docker-compose -p areteum-dev ps
-            docker-compose -p areteum-dev logs --tail=100 backend || true
+            docker-compose -p areteum-prod ps # 경로 변경
+            docker-compose -p areteum-prod logs --tail=100 backend || true 
